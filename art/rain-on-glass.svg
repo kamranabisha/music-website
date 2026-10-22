@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Album artwork">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B1016"/>
+      <stop offset="55%" stop-color="#0B1016"/>
+      <stop offset="100%" stop-color="#48BFE3" stop-opacity="0.55"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#48BFE3" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#48BFE3" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5E60CE" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#5E60CE" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="42%" r="68%">
+      <stop offset="60%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    </radialGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="42"/>
+    </filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#base)"/>
+  <g filter="url(#soft)">
+    <ellipse cx="170" cy="150" rx="180" ry="160" fill="url(#glowA)"/>
+    <ellipse cx="450" cy="450" rx="200" ry="170" fill="url(#glowB)"/>
+  </g>
+
+  <g>
+    <circle cx="70" cy="70" r="5" fill="#5E60CE" opacity="0.5"/>
+    <circle cx="207" cy="161" r="12" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="344" cy="252" r="19" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="481" cy="343" r="10" fill="#5E60CE" opacity="0.5"/>
+    <circle cx="148" cy="434" r="17" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="285" cy="525" r="8" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="422" cy="146" r="15" fill="#5E60CE" opacity="0.5"/>
+    <circle cx="89" cy="237" r="6" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="226" cy="328" r="13" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="363" cy="419" r="20" fill="#5E60CE" opacity="0.5"/>
+    <circle cx="500" cy="510" r="11" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="167" cy="131" r="18" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="304" cy="222" r="9" fill="#5E60CE" opacity="0.5"/>
+    <circle cx="441" cy="313" r="16" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="108" cy="404" r="7" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="245" cy="495" r="14" fill="#5E60CE" opacity="0.5"/>
+    <circle cx="382" cy="116" r="5" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="519" cy="207" r="12" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="186" cy="298" r="19" fill="#5E60CE" opacity="0.5"/>
+    <circle cx="323" cy="389" r="10" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="460" cy="480" r="17" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="127" cy="101" r="8" fill="#5E60CE" opacity="0.5"/>
+    <circle cx="264" cy="192" r="15" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="401" cy="283" r="6" fill="#48BFE3" opacity="0.5"/>
+    <circle cx="538" cy="374" r="13" fill="#5E60CE" opacity="0.5"/>
+    <circle cx="205" cy="465" r="20" fill="#48BFE3" opacity="0.5"/>
+  </g>
+
+  <rect width="600" height="600" fill="url(#vig)"/>
+  <rect width="600" height="600" filter="url(#grain)" opacity="0.07"/>
+  <rect x="6" y="6" width="588" height="588" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2" rx="4"/>
+</svg>

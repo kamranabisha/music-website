@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sonora — a premium web music player with playlist, search, genres, shuffle and repeat. Task 3 of the ARCH Internship (Web Development), built with HTML, CSS and vanilla JavaScript." />
+  <meta name="theme-color" content="#08080d" />
+  <title>Sonora · Music Player — ARCH Internship · Task 3</title>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2308080d'/%3E%3Cg fill='%238b5cf6'%3E%3Crect x='7' y='13' width='3' height='6' rx='1.5'/%3E%3Crect x='13' y='8' width='3' height='16' rx='1.5'/%3E%3Crect x='19' y='11' width='3' height='10' rx='1.5'/%3E%3Crect x='25' y='14' width='3' height='4' rx='1.5' fill='%23ff4d8d'/%3E%3C/g%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="ambient" aria-hidden="true">
+    <span class="ambient__orb ambient__orb--a"></span>
+    <span class="ambient__orb ambient__orb--b"></span>
+    <span class="ambient__orb ambient__orb--c"></span>
+  </div>
+
+  <div class="app" id="app">
+
+    <!-- ==================== SIDEBAR ==================== -->
+    <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+      <div class="sidebar__head">
+        <a class="brand" href="#" data-action="home">
+          <span class="brand__mark" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32" fill="currentColor">
+              <rect x="3" y="13" width="3.4" height="6" rx="1.7" />
+              <rect x="9.4" y="8" width="3.4" height="16" rx="1.7" />
+              <rect x="15.8" y="4" width="3.4" height="24" rx="1.7" />
+              <rect x="22.2" y="10" width="3.4" height="12" rx="1.7" />
+              <rect x="28.6" y="14" width="3.4" height="4" rx="1.7" opacity="0.6" />
+            </svg>
+          </span>
+          <span class="brand__name">Sonora</span>
+        </a>
+
+        <button class="icon-btn sidebar__close" type="button" data-action="close-menu" aria-label="Close navigation menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="nav" aria-label="Library views">
+        <p class="nav__label">Library</p>
+        <button class="nav__item is-active" type="button" data-view="library">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 18V5l12-2v13"></path>
+            <circle cx="6" cy="18" r="3"></circle>
+            <circle cx="18" cy="16" r="3"></circle>
+          </svg>
+          <span>All Songs</span>
+        </button>
+        <button class="nav__item" type="button" data-view="favorites">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"></path>
+          </svg>
+          <span>Favorites</span>
+          <span class="nav__count" id="favCount">0</span>
+        </button>
+        <button class="nav__item" type="button" data-view="recent">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path>
+            <path d="M3 3v5h5"></path>
+            <path d="M12 7v5l3.5 2"></path>
+          </svg>
+          <span>Recently Played</span>
+        </button>
+      </nav>
+
+      <nav class="nav nav--genres" aria-label="Browse by genre">
+        <p class="nav__label">Browse genres</p>
+        <div class="nav__genres" id="navGenres">
+          <button class="genre-link is-active" type="button" data-genre="all">
+            <span class="genre-dot" aria-hidden="true"></span>All
+          </button>
+          <button class="genre-link" type="button" data-genre="pop">
+            <span class="genre-dot" aria-hidden="true"></span>Pop
+          </button>
+          <button class="genre-link" type="button" data-genre="rock">
+            <span class="genre-dot" aria-hidden="true"></span>Rock
+          </button>
+          <button class="genre-link" type="button" data-genre="hiphop">
+            <span class="genre-dot" aria-hidden="true"></span>Hip-Hop
+          </button>
+          <button class="genre-link" type="button" data-genre="chill">
+            <span class="genre-dot" aria-hidden="true"></span>Chill
+          </button>
+          <button class="genre-link" type="button" data-genre="classical">
+            <span class="genre-dot" aria-hidden="true"></span>Classical
+          </button>
+        </div>
+      </nav>
+
+      <div class="sidebar__foot">
+        <p class="sidebar__foot-title">ARCH Internship</p>
+        <p>Task 3 &middot; Music Player<br />HTML, CSS &amp; vanilla JS</p>
+      </div>
+    </aside>
+
+    <div class="scrim" id="scrim" data-action="close-menu" aria-hidden="true"></div>
+
+    <!-- ==================== MAIN ==================== -->
+    <main class="main" id="main">
+      <header class="topbar">
+        <button class="icon-btn topbar__menu" type="button" data-action="open-menu" aria-label="Open navigation menu" aria-controls="sidebar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7"></line>
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="17" x2="14" y2="17"></line>
+          </svg>
+        </button>
+
+        <div class="search" role="search">
+          <svg class="search__icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+          </svg>
+          <input
+            class="search__input"
+            id="searchInput"
+            type="search"
+            placeholder="Search songs, artists, albums…"
+            autocomplete="off"
+            aria-label="Search music"
+          />
+          <button class="search__clear" id="searchClear" type="button" data-action="clear-search" aria-label="Clear search" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+            </svg>
+          </button>
+
+          <div class="search__panel" id="searchPanel" role="listbox" aria-label="Search results" hidden>
+            <ul class="search__results" id="searchResults"></ul>
+            <p class="search__empty" id="searchEmpty" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+              </svg>
+              No results found
+            </p>
+          </div>
+        </div>
+
+        <p class="topbar__count" id="resultCount">10 songs</p>
+      </header>
+
+      <section class="section" aria-labelledby="viewTitle">
+        <div class="section__head">
+          <div class="section__intro">
+            <p class="eyebrow" id="viewEyebrow">Your library</p>
+            <h1 class="section__title" id="viewTitle">All Songs</h1>
+            <p class="section__sub" id="viewSub">10 tracks across 5 genres</p>
+          </div>
+
+          <button class="ghost-btn" type="button" data-action="shuffle-play">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16 3h5v5"></path>
+              <path d="M4 20 21 3"></path>
+              <path d="M21 16v5h-5"></path>
+              <path d="M15 15l6 6"></path>
+              <path d="M4 4l5 5"></path>
+            </svg>
+            Shuffle play
+          </button>
+        </div>
+
+        <div class="chips" id="genreChips" role="group" aria-label="Filter by genre">
+          <button class="chip is-active" type="button" data-genre="all">All</button>
+          <button class="chip" type="button" data-genre="pop">Pop</button>
+          <button class="chip" type="button" data-genre="rock">Rock</button>
+          <button class="chip" type="button" data-genre="hiphop">Hip-Hop</button>
+          <button class="chip" type="button" data-genre="chill">Chill</button>
+          <button class="chip" type="button" data-genre="classical">Classical</button>
+        </div>
+
+        <div class="playlist card">
+          <div class="playlist__head" aria-hidden="true">
+            <span class="col-index">#</span>
+            <span class="col-art"></span>
+            <span>Title</span>
+            <span class="col-album">Album</span>
+            <span class="col-genre">Genre</span>
+            <span class="col-like"></span>
+            <span class="col-time">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 7v5l3 2"></path>
+              </svg>
+            </span>
+          </div>
+
+          <ul class="playlist__list" id="playlist"></ul>
+
+          <div class="state" id="emptyState" hidden>
+            <span class="state__icon" id="stateIcon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+                <line x1="8.5" y1="11" x2="13.5" y2="11"></line>
+              </svg>
+            </span>
+            <h3 class="state__title" id="stateTitle">No songs found</h3>
+            <p class="state__text" id="stateText">Try a different search or clear the filters.</p>
+            <button class="ghost-btn ghost-btn--accent" type="button" id="stateAction" data-action="reset-filters">Clear filters</button>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <p>&copy; <span id="year">2026</span> ARCH Internship &mdash; Task 3 &middot; Sonora Music Player</p>
+          <p class="footer__keys">Space: play &middot; &larr; &rarr;: seek &middot; &uarr; &darr;: volume &middot; M: mute</p>
+        </footer>
+      </section>
+    </main>
+
+    <!-- ==================== PLAYER RAIL ==================== -->
+    <section class="player card" id="player" aria-label="Now playing">
+      <div class="player__head">
+        <p class="eyebrow">
+          <span class="live-dot" aria-hidden="true"></span> Now playing
+        </p>
+        <button class="icon-btn like-btn" type="button" id="likeBtn" data-action="favorite-current" aria-label="Add current song to favorites" aria-pressed="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="art" id="artWrap">
+        <img class="art__img" id="artImg" src="art/midnight-mirage.svg" alt="Album artwork for Midnight Mirage" width="600" height="600" />
+        <span class="art__badge" id="artBadge" aria-hidden="true">
+          <span class="eq"><i></i><i></i><i></i><i></i></span>
+        </span>
+      </div>
+
+      <div class="meta">
+        <h2 class="meta__title" id="npTitle">Midnight Mirage</h2>
+        <p class="meta__artist" id="npArtist">Nova Skyline</p>
+        <div class="meta__tags">
+          <span class="tag" id="npGenre">Pop</span>
+          <span class="tag tag--ghost" id="npAlbum">Chrome Hearts</span>
+        </div>
+
+        <div class="meta__actions">
+          <button class="play-on" type="button" id="playOnBtn" data-action="play-on" aria-label="Play On — play the selected song now">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M8.5 5.2a1 1 0 0 1 1.5-.9l9 6.8a1 1 0 0 1 0 1.6l-9 6.8a1 1 0 0 1-1.5-.9V5.2z"></path>
+            </svg>
+            Play On
+          </button>
+        </div>
+      </div>
+
+      <div class="progress">
+        <input class="range" id="seekBar" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek position in song" aria-valuetext="0 seconds" />
+        <div class="progress__times">
+          <span id="curTime">0:00</span>
+          <span id="durTime">0:26</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="ctrl" type="button" id="shuffleBtn" data-action="shuffle" aria-label="Shuffle off" aria-pressed="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 3h5v5"></path>
+            <path d="M4 20 21 3"></path>
+            <path d="M21 16v5h-5"></path>
+            <path d="M15 15l6 6"></path>
+            <path d="M4 4l5 5"></path>
+          </svg>
+        </button>
+
+        <button class="ctrl" type="button" data-action="prev" aria-label="Previous song">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7 5a1 1 0 0 1 1 1v4.4l8.4-5.3A1 1 0 0 1 18 6v12a1 1 0 0 1-1.6.9L8 13.6V19a1 1 0 1 1-2 0V6a1 1 0 0 1 1-1z"></path>
+          </svg>
+        </button>
+
+        <button class="ctrl ctrl--play" type="button" id="playBtn" data-action="toggle-play" aria-label="Play">
+          <svg class="i-play" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M8.5 5.2a1 1 0 0 1 1.5-.9l9 6.8a1 1 0 0 1 0 1.6l-9 6.8a1 1 0 0 1-1.5-.9V5.2z"></path>
+          </svg>
+          <svg class="i-pause" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden>
+            <rect x="6.5" y="5" width="4" height="14" rx="1.4"></rect>
+            <rect x="13.5" y="5" width="4" height="14" rx="1.4"></rect>
+          </svg>
+        </button>
+
+        <button class="ctrl" type="button" data-action="next" aria-label="Next song">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17 5a1 1 0 0 0-1 1v4.4L7.6 5.1A1 1 0 0 0 6 6v12a1 1 0 0 0 1.6.9L16 13.6V19a1 1 0 1 0 2 0V6a1 1 0 0 0-1-1z"></path>
+          </svg>
+        </button>
+
+        <button class="ctrl ctrl--repeat" type="button" id="repeatBtn" data-action="repeat" aria-label="Repeat off" aria-pressed="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M17 2l4 4-4 4"></path>
+            <path d="M3 11v-1a4 4 0 0 1 4-4h14"></path>
+            <path d="M7 22l-4-4 4-4"></path>
+            <path d="M21 13v1a4 4 0 0 1-4 4H3"></path>
+          </svg>
+          <span class="ctrl__badge" id="repeatBadge" hidden>1</span>
+        </button>
+      </div>
+
+      <div class="volume">
+        <button class="icon-btn" type="button" id="muteBtn" data-action="mute" aria-label="Mute volume" aria-pressed="false">
+          <svg class="i-vol" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 5 6.5 9H3v6h3.5L11 19V5z" fill="currentColor" stroke="none"></path>
+            <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+            <path d="M18.5 5.5a9 9 0 0 1 0 13"></path>
+          </svg>
+          <svg class="i-vol-mute" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden>
+            <path d="M11 5 6.5 9H3v6h3.5L11 19V5z" fill="currentColor" stroke="none"></path>
+            <line x1="16" y1="9.5" x2="21" y2="14.5"></line>
+            <line x1="21" y1="9.5" x2="16" y2="14.5"></line>
+          </svg>
+        </button>
+
+        <input class="range range--vol" id="volBar" type="range" min="0" max="100" step="1" value="80" aria-label="Volume" aria-valuetext="80 percent" />
+      </div>
+
+      <div class="player__foot">
+        <p class="queue" id="queueInfo">Playing from All Songs &middot; All genres</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== MOBILE MINI BAR ==================== -->
+  <div class="minibar" id="minibar">
+    <div class="minibar__track" aria-hidden="true"><span id="miniProgress"></span></div>
+
+    <button class="minibar__info" type="button" data-action="scroll-player">
+      <img class="minibar__art" id="miniArt" src="art/midnight-mirage.svg" alt="" width="600" height="600" />
+      <span class="minibar__text">
+        <strong id="miniTitle">Midnight Mirage</strong>
+        <small id="miniArtist">Nova Skyline</small>
+      </span>
+    </button>
+
+    <div class="minibar__controls">
+      <button class="icon-btn" type="button" data-action="prev" aria-label="Previous song">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M7 5a1 1 0 0 1 1 1v4.4l8.4-5.3A1 1 0 0 1 18 6v12a1 1 0 0 1-1.6.9L8 13.6V19a1 1 0 1 1-2 0V6a1 1 0 0 1 1-1z"></path>
+        </svg>
+      </button>
+      <button class="icon-btn icon-btn--play" type="button" id="miniPlayBtn" data-action="toggle-play" aria-label="Play">
+        <svg class="i-play" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M8.5 5.2a1 1 0 0 1 1.5-.9l9 6.8a1 1 0 0 1 0 1.6l-9 6.8a1 1 0 0 1-1.5-.9V5.2z"></path>
+        </svg>
+        <svg class="i-pause" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden>
+          <rect x="6.5" y="5" width="4" height="14" rx="1.4"></rect>
+          <rect x="13.5" y="5" width="4" height="14" rx="1.4"></rect>
+        </svg>
+      </button>
+      <button class="icon-btn" type="button" data-action="next" aria-label="Next song">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17 5a1 1 0 0 0-1 1v4.4L7.6 5.1A1 1 0 0 0 6 6v12a1 1 0 0 0 1.6.9L16 13.6V19a1 1 0 1 0 2 0V6a1 1 0 0 0-1-1z"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <p class="sr-only" id="liveRegion" role="status" aria-live="polite"></p>
+
+  <audio id="audio" preload="metadata"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

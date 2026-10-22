@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Album artwork">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0C1013"/>
+      <stop offset="55%" stop-color="#0C1013"/>
+      <stop offset="100%" stop-color="#80FFDB" stop-opacity="0.55"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#80FFDB" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#80FFDB" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7B2CBF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#7B2CBF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="42%" r="68%">
+      <stop offset="60%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    </radialGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="42"/>
+    </filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#base)"/>
+  <g filter="url(#soft)">
+    <ellipse cx="170" cy="150" rx="180" ry="160" fill="url(#glowA)"/>
+    <ellipse cx="450" cy="450" rx="200" ry="170" fill="url(#glowB)"/>
+  </g>
+
+  <g>
+    <path d="M120 80 Q 106 300 120 520" stroke="#80FFDB" stroke-width="5" fill="none" opacity="0.7"/>
+    <path d="M172 80 Q 172 300 172 520" stroke="#7B2CBF" stroke-width="5" fill="none" opacity="0.7"/>
+    <path d="M224 80 Q 238 300 224 520" stroke="#80FFDB" stroke-width="5" fill="none" opacity="0.7"/>
+    <path d="M276 80 Q 262 300 276 520" stroke="#7B2CBF" stroke-width="5" fill="none" opacity="0.7"/>
+    <path d="M328 80 Q 328 300 328 520" stroke="#80FFDB" stroke-width="5" fill="none" opacity="0.7"/>
+    <path d="M380 80 Q 394 300 380 520" stroke="#7B2CBF" stroke-width="5" fill="none" opacity="0.7"/>
+    <path d="M432 80 Q 418 300 432 520" stroke="#80FFDB" stroke-width="5" fill="none" opacity="0.7"/>
+    <path d="M484 80 Q 484 300 484 520" stroke="#7B2CBF" stroke-width="5" fill="none" opacity="0.7"/>
+  </g>
+
+  <rect width="600" height="600" fill="url(#vig)"/>
+  <rect width="600" height="600" filter="url(#grain)" opacity="0.07"/>
+  <rect x="6" y="6" width="588" height="588" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2" rx="4"/>
+</svg>

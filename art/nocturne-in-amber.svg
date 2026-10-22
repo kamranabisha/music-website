@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Album artwork">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#14100C"/>
+      <stop offset="55%" stop-color="#14100C"/>
+      <stop offset="100%" stop-color="#FFB703" stop-opacity="0.55"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFB703" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#FFB703" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E07A5F" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#E07A5F" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="42%" r="68%">
+      <stop offset="60%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    </radialGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="42"/>
+    </filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#base)"/>
+  <g filter="url(#soft)">
+    <ellipse cx="170" cy="150" rx="180" ry="160" fill="url(#glowA)"/>
+    <ellipse cx="450" cy="450" rx="200" ry="170" fill="url(#glowB)"/>
+  </g>
+
+  <g>
+    <rect x="96" y="170" width="38" height="260" rx="8" fill="#ffffff" opacity="0.3"/>
+    <rect x="142" y="170" width="38" height="260" rx="8" fill="#ffffff" opacity="0.14"/>
+    <rect x="188" y="170" width="38" height="260" rx="8" fill="#ffffff" opacity="0.3"/>
+    <rect x="234" y="170" width="38" height="260" rx="8" fill="#ffffff" opacity="0.3"/>
+    <rect x="280" y="170" width="38" height="260" rx="8" fill="#ffffff" opacity="0.14"/>
+    <rect x="326" y="170" width="38" height="260" rx="8" fill="#ffffff" opacity="0.3"/>
+    <rect x="372" y="170" width="38" height="260" rx="8" fill="#ffffff" opacity="0.3"/>
+    <rect x="418" y="170" width="38" height="260" rx="8" fill="#ffffff" opacity="0.14"/>
+    <rect x="464" y="170" width="38" height="260" rx="8" fill="#ffffff" opacity="0.3"/>
+    <rect x="140" y="170" width="320" height="8" fill="#FFB703" opacity="0.9"/>
+  </g>
+
+  <rect width="600" height="600" fill="url(#vig)"/>
+  <rect width="600" height="600" filter="url(#grain)" opacity="0.07"/>
+  <rect x="6" y="6" width="588" height="588" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2" rx="4"/>
+</svg>

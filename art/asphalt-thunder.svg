@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Album artwork">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#140F12"/>
+      <stop offset="55%" stop-color="#140F12"/>
+      <stop offset="100%" stop-color="#E63946" stop-opacity="0.55"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E63946" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#E63946" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF9F1C" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FF9F1C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vig" cx="50%" cy="42%" r="68%">
+      <stop offset="60%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    </radialGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="42"/>
+    </filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#base)"/>
+  <g filter="url(#soft)">
+    <ellipse cx="170" cy="150" rx="180" ry="160" fill="url(#glowA)"/>
+    <ellipse cx="450" cy="450" rx="200" ry="170" fill="url(#glowB)"/>
+  </g>
+
+  <g>
+    <path d="M330 70 L210 300 L295 300 L250 530 L400 275 L310 275 Z" fill="#E63946" opacity="0.5"/>
+    <path d="M330 70 L210 300 L295 300 L250 530 L400 275 L310 275 Z" fill="none" stroke="#FF9F1C" stroke-width="6" opacity="0.85"/>
+  </g>
+
+  <rect width="600" height="600" fill="url(#vig)"/>
+  <rect width="600" height="600" filter="url(#grain)" opacity="0.07"/>
+  <rect x="6" y="6" width="588" height="588" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2" rx="4"/>
+</svg>
